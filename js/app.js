@@ -15,8 +15,6 @@
         displayname: "test user displayname",
         email_address: "huangbq.01@gmail.com",
         location: "college park, MD",
-        hometown: "Shanghai, China",
-        language: ["English","Chinese"],
         birthday: "1989-04-11",
         gender: "male",
         bio: "I'm interested in everything! I'm a test user!",
@@ -52,8 +50,7 @@
         name: "Maryland basketball meetup",
         thumbnail: "img/4.jpg",
         caption: "GET A DUNK!"
-    },
-    ];
+    }];
 
     var all_interests = [{
             name: "Art",
@@ -91,3 +88,25 @@
             name: "Cloud Computing",
             parent: "Internet & Technology"
         }];
+
+    var event_details = {
+        eventid: "123123",
+        name: "Empowering Mobile Development with Angular",
+        location: "123 Test Rd, college park, MD",
+        description: 'A discussion of some of the core technologies we use at Nudge to enable Angular-based JS/HTML5 applications to "feel native", including PhoneGap/Cordova, ngTouch, and "notifying" promises with local data for lightning-fast response times. The talk should hopefully be useful to anyone interested in pursuing PhoneGap apps, mobile web development, and anyone looking to make their Angular apps feel more responsive.'
+    };
+
+    var attender_list = {
+        eventid : "123123",
+        attenders: [{
+            userid: "100001userid",
+            name: "test user"
+        },
+        {
+            userid: "100002userid",
+            name: "test user2"
+        },{
+            userid: "100003userid",
+            name: "test user3"
+        }]
+    };
