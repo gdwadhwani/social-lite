@@ -1,0 +1,34 @@
+<div class="event-list">
+	<div class="container">
+        <div class="col-md-12">
+            <div class="index-search-section">
+                <label>Search for something interesting to you:</label>
+                <ul>
+                    <li>
+                        <div class="input-group col-md-6">
+                            <input ng-model="query" type="text" placeholder="Input your thought" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button">Search!</button>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-default" type="button">Option1</button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default" type="button">Option2</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="sort-section">
+                <p>Order by: <a href="#">Date<span class="caret"></span></a><a href="#">Location<span class="caret"></span></a><a href="#">Participants<span class="caret"></span></a></p>
+            </div>
+        </div>
+        <div ng-repeat="item in eve.eventItems | filter:query">
+            <event-item ng-show="item.thumbnail.length"></event-item>
+        </div>
+		<div class="col-md-12 load-more"><a href="#">Load More</a></div>
+	</div>
+</div>

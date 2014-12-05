@@ -5,12 +5,36 @@
         this.eventItems = events;
     });
 
-    app.directive("eventItem", function(){
-        return {
-            restrict: "E",
-            templateUrl: "event-item.html",
-        };
+    app.controller('UserController', function () {
+        this.userInfo = currentUser;
     });
+
+    var currentUser = {
+        userid: "100001userid",
+        password: "test password",
+        displayname: "test user displayname",
+        email_address: "huangbq.01@gmail.com",
+        location: "college park, MD",
+        hometown: "Shanghai, China",
+        language: ["English","Chinese"],
+        birthday: "1989-04-11",
+        gender: "male",
+        bio: "I'm interested in everything! I'm a test user!",
+        interests: [{
+            name: "Social Media",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Interaction Design",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Cloud Computing",
+            parent: "Internet & Technology"
+        }],
+        facebook_url: "www.facebook.com/test-user-facebook",
+        twitter_url: "www.twitter.com/test-user-twitter"
+    };
 
     var events = [{
         name: "DC wine hangout",
@@ -30,3 +54,40 @@
         caption: "GET A DUNK!"
     },
     ];
+
+    var all_interests = [{
+            name: "Art",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Fiction",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Film",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Lean Startup",
+            parent: "Business & Career"
+        },
+        {
+            name: "Marketing",
+            parent: "Business & Career"
+        },
+        {
+            name: "Investing",
+            parent: "Business & Career"
+        },
+        {
+            name: "Social Media",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Interaction Design",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Cloud Computing",
+            parent: "Internet & Technology"
+        }];
