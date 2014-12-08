@@ -1,7 +1,7 @@
 
     var app = angular.module('socialLite', []);
 
-    app.controller('EventController', function(){
+    app.controller('EventController', function($scope){
         this.eventItems = events;
     });
 
