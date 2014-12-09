@@ -60,18 +60,22 @@ def load_all_events():
     # for song in all_songs:
     #     song.tags = song.tags.split(",")
     all_events = [{
+        'eventid': 123,
         'name': "DC wine hangout",
         'thumbnail': "static/img/1.jpg",
         'caption': "The wine Caption"
     }, {
+        'eventid': 124,
         'name': "DC game hangout",
         'thumbnail': "static/img/2.jpg",
         'caption': "The game strings"
     }, {
+        'eventid': 125,
         'name': "Maryland football meetup",
         'thumbnail': "static/img/3.jpg",
         'caption': "football YESSSS!"
     }, {
+        'eventid': 126,
         'name': "Maryland basketball meetup",
         'thumbnail': "static/img/4.jpg",
         'caption': "GET A DUNK!"

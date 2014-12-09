@@ -2,15 +2,15 @@
     <head>
         <title>Social Lite</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/main.css">
+        <link rel="stylesheet" type="text/css" href="static/css/main.css">
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../js/angular.min.js"></script>
-        <script type="text/javascript" src="../js/app.js"></script>
+        <script type="text/javascript" src="static/js/angular.min.js"></script>
+        <script type="text/javascript" src="static/js/app.js"></script>
     </head>
-    <body ng-controller="EventController as userCtrl">
+    <body ng-controller="EventController as eveCtrl">
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -29,8 +29,31 @@
                 </div>
             </div>
         </nav>
-        <div>
-
-        </div>
+        <form name="newEventForm" ng-submit="newEventForm.$valid && eveCtrl.createNewEvent()">
+            <p>Create a new event</p>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" ng-model="eveCtrl.newEvent.name" required/></td>
+                </tr>
+                <tr>
+                    <td>Caption:</td>
+                    <td><input type="text" ng-model="eveCtrl.newEvent.caption" required/></td>
+                </tr>
+                <tr>
+                    <td>thumbnail:</td>
+                    <td><input type="text" ng-model="eveCtrl.newEvent.thumbnail"/></td>
+                </tr>
+                <tr>
+                    <td>location:</td>
+                    <td><input type="text" ng-model="eveCtrl.newEvent.location" required/></td>
+                </tr>
+                <tr>
+                    <td>description:</td>
+                    <td><input type="text" ng-model="eveCtrl.newEvent.description" required/></td>
+                </tr>
+            </table>
+            <button type="submit" value="submit">Submit</button>
+        </form>
     </body>
 </html>
