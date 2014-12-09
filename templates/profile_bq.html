@@ -2,13 +2,13 @@
 <head>
 	<title>Social Lite</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/angular.min.js"></script>
-    <script type="text/javascript" src="../js/app.js"></script>
+    <script type="text/javascript" src="static/js/angular.min.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
 </head>
 <body ng-controller="UserController as userCtrl">
 	<nav class="navbar navbar-default" role="navigation">
@@ -30,6 +30,7 @@
 		</div>
 	</nav>
     <form name="userForm" ng-submit="userForm.$valid && userCtrl.updateUserInfo()">
+        <p>Edit User Profile</p>
         <table>
             <tr>
                 <td>
@@ -73,6 +74,14 @@
             </tr>
             <tr>
                 <td>
+                    Bio:
+                </td>
+                <td>
+                    <input type="text" ng-model="userCtrl.currentUser.bio"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Photo:
                 </td>
                 <td>
@@ -84,34 +93,9 @@
         <div>
             <p>Interests :</p>
             <div>
-                <!--<ul class="interests-list">-->
-                    <!--<li>-->
-                        <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="Arts & Entertainment" />Arts & Entertainment</label>-->
-                        <!--<ul>-->
-                            <!--<li ng-repeat="ints in userCtrl.allInts | getCatedInts:cate1">-->
-                                <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="ints.name"/>{{ints.name}}</label>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="Business & Career" />Business & Career</label>-->
-                        <!--<ul>-->
-                            <!--<li ng-repeat="ints in userCtrl.allInts | getCatedInts:cate2">-->
-                                <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="ints.name"/>{{ints.name}}</label>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="Internet & Technology" />Internet & Technology</label>-->
-                        <!--<ul>-->
-                            <!--<li ng-repeat="ints in userCtrl.allInts | getCatedInts:cate3">-->
-                                <!--<label><input type="checkbox" checklist-model="selectedInts" checklist-value="ints.name"/>{{ints.name}}</label>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                <!--</ul>-->
+
                 <div ng-repeat="item in userCtrl.allInts">
-                    <input type="checkbox" checklist-model="selectedInts" checklist-value="item.name">{{item.name}}</p>
+                    <label><input type="checkbox" checklist-model="userCtrl.currentUser.interests" checklist-value="item">{{'{{item.name}}'}}</label>
                 </div>
             </div>
         </div>

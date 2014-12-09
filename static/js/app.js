@@ -5,26 +5,42 @@
 //        this.eventItems = events;
         var eventCtrl = this;
         eventCtrl.eventItems = [];
+        eventCtrl.newEvent = {};
 
         $http.get('/all-events').success(function(data){
             eventCtrl.eventItems = data;
         });
+
+        eventCtrl.createNewEvent = function(){
+            $http.post('/createNewEvent', eventCtrl.newEvent).success(function(data){
+                // do something?
+                eventCtrl.newEvent = {};
+            });
+        };
     }]);
 
-    app.controller('UserController', function ($scope) {
-        this.currentUser = currentUserInfo;
-        this.allInts = all_interests;
-        this.parentInts = ["Arts & Entertainment", "Business & Career", "Internet & Technology"];
+    app.controller('UserController', ['$http', '$log', function ($http, $log, $scope) {
 
-        $scope.cate1 = "Arts & Entertainment";
-        $scope.cate2 = "Business & Career";
-        $scope.cate3 = "Internet & Technology";
+        var userCtrl = this;
+        userCtrl.currentUser = {};
+        userCtrl.allInts = [];
 
-        this.updateUserInfo = function(){
+        $http.get('/currentUserInfo').success(function(data){
+            userCtrl.currentUser = data;
+        });
 
-            debugger;
+        $http.get('/all-interests').success(function(data){
+            userCtrl.allInts = data;
+        });
+
+        userCtrl.updateUserInfo = function(){
+            $http.post('/updateCurrentUser', userCtrl.currentUser).success(function(data){
+                // do something?
+            });
         };
-    });
+
+    }]);
+
     app.filter('getCatedInts', function () {
       return function (items, cate) {
         var filtered = [];
@@ -37,8 +53,6 @@
         return filtered;
       };
     });
-
-
 
     var currentUserInfo = {
         userid: "100001userid",
@@ -65,7 +79,8 @@
         twitter_url: "www.twitter.com/test-user-twitter"
     };
 
-    var events = [{
+    var events = [
+        {
         name: "DC wine hangout",
         thumbnail: "img/1.jpg",
         caption: "The wine Caption"
@@ -81,9 +96,11 @@
         name: "Maryland basketball meetup",
         thumbnail: "img/4.jpg",
         caption: "GET A DUNK!"
-    }];
+    }
+    ];
 
-    var all_interests = [{
+    var all_interests = [
+        {
             name: "Art",
             parent: "Arts & Entertainment"
         },
@@ -118,7 +135,8 @@
         {
             name: "Cloud Computing",
             parent: "Internet & Technology"
-        }];
+        }
+    ];
 
     var event_details = {
         eventid: "123123",

@@ -39,8 +39,18 @@ def teardown_request(exception):
 
 
 @app.route('/')
-def load_index():
+def render_index_page():
     return render_template('index.html')
+
+
+@app.route('/profile')
+def render_profile_page():
+    return render_template('profile_bq.html')
+
+
+@app.route('/addNewEvent')
+def render_add_new_event_page():
+    return render_template('addNewEvent.html')
 
 
 @app.route('/all-events')
@@ -68,18 +78,79 @@ def load_all_events():
     }]
     return json.dumps(all_events)
 
-# @app.route('/UpdateSongs', methods=["POST"])
-# def update_songs():
-#     answer_str = str(request.json)
-#     content = request.json["fridge"]
-#     g.db.execute('delete * from tb_song')
-#     g.db.execute('insert into fridges (answer) values (?)', [answer_str])
-#     g.db.commit()
-#     f_id = query_db('select id from fridges order by id desc')[0][0]
-#     for con in content:
-#         g.db.execute('insert into contents (fridge_id, fruit_name, fruit_amount) values (?,?,?)', [f_id, con, content[con]])
-#     g.db.commit()
-#     return "success"
+
+@app.route('/all-interests')
+def load_all_interests():
+    all_interests = [{
+        'name': "Art",
+        'parent': "Arts & Entertainment"
+    }, {
+        'name': "Fiction",
+        'parent': "Arts & Entertainment"
+    }, {
+        'name': "Film",
+        'parent': "Arts & Entertainment"
+    }, {
+        'name': "Lean Startup",
+        'parent': "Business & Career"
+    }, {
+        'name': "Marketing",
+        'parent': "Business & Career"
+    }, {
+        'name': "Investing",
+        'parent': "Business & Career"
+    }, {
+        'name': "Social Media",
+        'parent': "Internet & Technology"
+    }, {
+        'name': "Interaction Design",
+        'parent': "Internet & Technology"
+    }, {
+        'name': "Cloud Computing",
+        'parent': "Internet & Technology"
+    }]
+    return json.dumps(all_interests)
+
+
+@app.route('/updateCurrentUser', methods=["POST"])
+def update_current_user():
+    item = json.loads(request.data)
+    return 'a'
+
+
+@app.route('/currentUserInfo')
+def get_current_user_info():
+    currentUserInfo = {
+        'userid': "100001userid",
+        'password': "test password",
+        'displayname': "test user displayname",
+        'email_address': "huangbq.01@gmail.com",
+        'location': "college park, MD",
+        'age': "25",
+        'gender': "male",
+        'bio': "I'm interested in everything! I'm a test user!",
+        'interests': [{
+            'name': "Social Media",
+            'parent': "Internet & Technology"
+        },
+        {
+            'name': "Interaction Design",
+            'parent': "Internet & Technology"
+        },
+        {
+            'name': "Cloud Computing",
+            'parent': "Internet & Technology"
+        }],
+        'facebook_url': "www.facebook.com/test-user-facebook",
+        'twitter_url': "www.twitter.com/test-user-twitter"
+    }
+    return jsonify(currentUserInfo)
+
+
+@app.route('/createNewEvent', methods=["POST"])
+def create_new_event():
+    item = json.loads(request.data)
+    return 'a'
 
 
 if __name__ == '__main__':
