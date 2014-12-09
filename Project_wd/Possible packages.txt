@@ -1,0 +1,80 @@
+1. Flask
+Beginner's python web framework
+Unless more than half of the team members agree to use Django, we will keep using Flask.
+
+
+2. SQLAlchemy
+SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
+We will use database. So we use the best~!
+
+
+3. Requests
+Requests is an elegant and simple HTTP library for Python, built for human beings.
+Looks like a must for every python developer. So why don't we use it?
+
+
+5. nltk
+Natural Language Toolkit
+We may want to do something with NLP if we have time. This will surely improve the recommendation system if properly implemented.
+
+
+4. Flask-SocketIO
+Socket.IO integration for Flask applications
+We may try to add live-chat function to the app. So we may need the socket integration for Flask.
+
+
+create table users (
+  uid integer primary key autoincrement,
+  name text not null,
+  password text not null,
+  gender int,
+  address text,
+  zip text,
+  email text,
+  phone text,
+  headshot text,
+  status int,
+  other text
+);
+
+create table inte (
+  uid int,
+  iid int,
+  foreign key(uid) references users(uid)
+  primary key (uid,interests)
+)
+
+create table user_inte(
+  iid int primary key autoincrement,
+  name text
+)
+
+
+create table meet(
+    mid int primary key,
+    title text,
+
+
+@app.route('/')
+def hello_world():
+    return render_template('layout.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+# The method for checking user authentication
+# components: templates/login.html
+# input : user id , password
+# output : boolean(success/fail)
+# addition : holds user session
+def login():
+    error = None
+    if request.method == 'POST':
+        cur = g.db.execute('select username from userdata where username=? and password=?',
+                           [request.form['username'], request.form['password']])
+        if cur == None:
+            error = "Wrong username or password!"
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return render_template('login.html', error="HI")
+    return render_template('login.html', error=error)

@@ -67,19 +67,19 @@
 
     var events = [{
         name: "DC wine hangout",
-        thumbnail: "../img/1.jpg",
+        thumbnail: "img/1.jpg",
         caption: "The wine Caption"
     },{
         name: "DC game hangout",
-        thumbnail: "../img/2.jpg",
+        thumbnail: "img/2.jpg",
         caption: "The game strings"
     },{
         name: "Maryland football meetup",
-        thumbnail: "static/img/3.jpg",
+        thumbnail: "img/3.jpg",
         caption: "football YESSSS!"
     },{
         name: "Maryland basketball meetup",
-        thumbnail: "static/img/4.jpg",
+        thumbnail: "img/4.jpg",
         caption: "GET A DUNK!"
     }];
 
