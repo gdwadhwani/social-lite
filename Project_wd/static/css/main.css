@@ -1,3 +1,7 @@
+a{
+    cursor: pointer;
+}
+
 .navbar-brand{
 	font-family: 'Lobster', cursive;
 }
@@ -143,4 +147,20 @@
 {
     display:inline-block;
     margin:5px;
+}
+
+.event-detail>caption{
+    font-size: 22px;
+    font-weight: 700;
+
+}
+
+.event-detail ul>li{
+    list-style: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+.event-detail ul{
+    -webkit-padding-start: 0px;
 }

@@ -16,9 +16,10 @@
 {% else %}
 <a href="{{url_for('logout')}}">logout</a>
 {% endif %}
-<a href="{{url_for('createevent')}}">create</a>
-<a href="{{url_for('profile')}}" id="temp">profile</a>
-<a href="{{url_for('search')}}">search</a>
+<a href="#">create</a>
+<a href="#" id="temp">profile</a>
+<a href="{{url_for('get_rsvped_event')}}">search</a>
+<a href="{{url_for('load_all_events')}}">load</a>
 {% block login %}{% endblock %}
 {% block signup %}{% endblock %}
 {% block create %}{% endblock %}

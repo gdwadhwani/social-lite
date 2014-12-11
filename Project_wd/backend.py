@@ -41,7 +41,6 @@ def teardown_request(exception):
 @app.route('/')
 def render_index_page():
     return render_template('index.html')
-    # return redirect('/profile')
 
 
 @app.route('/profile')
@@ -54,11 +53,10 @@ def render_add_new_event_page():
     return render_template('addNewEvent.html')
 
 
-@app.route('/eventDetail', methods=["GET", "POST"])
+@app.route('/eventDetail')
 def gotoEventDetail():
     item = request.data
-    if len(item) > 0:
-        session['detaileventid'] = item
+    session['detaileventid'] = item
     return render_template('eventDetail.html')
 
 
@@ -70,7 +68,6 @@ def render_account_index():
 @app.route('/getEventDetail', methods=["GET"])
 def getEventDetail():
     item = {
-        'eventid': 'abc',
         'title': 'test event name',
         'detail': 'detail description',
         'address': 'test location',
@@ -179,13 +176,21 @@ def get_current_user_info():
         'birth': '1989-12-12',
         'gender': "male",
         'bio': "I'm interested in everything! I'm a test user!",
-        'interests': ["Evolution"],
+        'interests': [{
+            'name': "Social Media",
+            'parent': "Internet & Technology"
+        },
+        {
+            'name': "Interaction Design",
+            'parent': "Internet & Technology"
+        },
+        {
+            'name': "Cloud Computing",
+            'parent': "Internet & Technology"
+        }],
         'facebook_url': "www.facebook.com/test-user-facebook",
         'twitter_url': "www.twitter.com/test-user-twitter"
     }
-    # currentUserInfo = {}
-
-    # item = session['username']
     return json.dumps(currentUserInfo)
 
 
@@ -267,44 +272,11 @@ def get_rsvped_event():
 
 @app.route('/checkUser')
 def check_user():
-    # session['username'] ='adf'
+    session['username'] ='adf'
     if len(str(session['username'])) > 0:
         return str(session['username'])
     else:
         return ''
-
-
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    item = request.data
-    session['username'] = item.username
-    return "success"
-
-
-@app.route('/logout', methods=["GET", "POST"])
-def logout():
-    return "success"
-
-
-@app.route('/signup', methods=["GET", "POST"])
-def signup():
-    item = request.data
-    return "success"
-
-
-@app.route('/getDiscussion', methods=["GET", "POST"])
-def get_discussion():
-    item = [{'title': 'This is the title',
-             'creator': 'The creator',
-             'content': 'the content of the post'}]
-    return json.dumps(item)
-
-
-@app.route('/newPost', methods=["GET", "POST"])
-def post_new():
-    item = request.data
-    return 'success'
-
 
 if __name__ == '__main__':
     app.run()

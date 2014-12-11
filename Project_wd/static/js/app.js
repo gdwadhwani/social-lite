@@ -1,23 +1,17 @@
 (function(){
     var app = angular.module('socialLite', []);
 
-    app.controller('EventController',['$http', '$log', '$rootScope', function($http, $log, $scope, $rootScope){
+    app.controller('EventController',['$http', '$log', function($http, $log, $scope){
 //        this.eventItems = events;
-
         var eventCtrl = this;
         eventCtrl.eventItems = [];
         eventCtrl.newEvent = {
             category: []
         };
-        eventCtrl.eventDetail = {
-            member:[]
-        };
-        eventCtrl.allInts = all_interests;
+        eventCtrl.eventDetail = {};
+        eventCtrl.allInts = [];
         eventCtrl.msg = "";
-        eventCtrl.rsvp = false;
-        eventCtrl.discussion = [];
-        eventCtrl.newPost = {};
-        eventCtrl.rsvpmsg = "";
+        eventCtrl.rsvpflag = false;
 
         $http.get('/all-events').success(function(data){
             eventCtrl.eventItems = data;
@@ -25,26 +19,21 @@
 
         $http.get('/getEventDetail').success(function(data){
             eventCtrl.eventDetail = data;
-            if(typeof eventCtrl.eventDetail.eventid != "undefined"){
-                $http.get('/getDiscussion').success(function(data){
-                    eventCtrl.discussion = data;
-                });
-            }
         });
 
-//        $http.get('/all-interests').success(function(data){
-//            eventCtrl.allInts = data;
-//        });
+        $http.get('/all-interests').success(function(data){
+            eventCtrl.allInts = data;
+        });
 
         eventCtrl.createNewEvent = function(){
-            if(eventCtrl.msg.length > 0){
-                eventCtrl.msg.length = "";
-            }
-            $http.post('/createNewEvent', eventCtrl.newEvent).success(function(data){
+            $http.post('/createNewEvent', eventCtrl.newEvent);
+            /*
+            .success(function(data){
                 // do something?
                 eventCtrl.newEvent = {category: []};
-                eventCtrl.msg = "Success!";
+
             });
+            */
         };
 
         eventCtrl.gotoEventDetail = function(eventid){
@@ -53,130 +42,55 @@
             });
         };
 
-        $scope.gotoEventDetail = function(eventid){
-            $http.post('/eventDetail',eventid).success(function(data){
-                debugger;
-            });
-        }
-
         eventCtrl.rsvpEvent = function(){
-            if(eventCtrl.rsvpmsg.length > 0){
-                eventCtrl.rsvpmsg = "";
-            }
             $http.post('/rsvpEvent','true').success(function(data){
-                eventCtrl.rsvpmsg = "Success!";
+                eventCtrl.msg = data;
                 eventCtrl.rsvpflag = true;
                 debugger;
             });
         };
-
-        eventCtrl.postNewDiscussion = function(){
-            eventCtrl.newPost.creator = $scope.currentUserName;
-            eventCtrl.discussion.push(eventCtrl.newPost);
-            $http.post('/newPost', eventCtrl.newPost).success(function(data){
-                debugger;
-            });
-            eventCtrl.newPost = {};
-        };
-
-//        eventCtrl.checkRSVPed = function(user){
-//            if(event_details.member.indexOf(user) > 0){
-//                return true;
-//            }
-//            else{
-//                return false;
-//            }
-//        }
-        $scope.$on('$viewContentLoaded', jq_Controls());
     }]);
 
-    app.controller('UserController', ['$http', '$log', '$rootScope', 'fileUpload', function ($http, $log, $scope, fileUpload) {
+    app.controller('UserController', ['$http', '$log', function ($http, $log, $scope) {
 
         var userCtrl = this;
         userCtrl.currentUser = {};
-        userCtrl.allInts = all_interests;
+        userCtrl.allInts = [];
         userCtrl.rsvpedEvent = [];
         userCtrl.reco = [];
-        userCtrl.auth = {};
-        userCtrl.msg = "";
-
-        $scope.uploadFile = function(){
-        var file = $scope.myFile;
-        console.log('file is ' + JSON.stringify(file));
-        var uploadUrl = "/fileUpload";
-        fileUpload.uploadFileToUrl(file, uploadUrl);
-    };
 
         $http.get('/currentUserInfo').success(function (data) {
             userCtrl.currentUser = data;
-            if(typeof userCtrl.currentUser.username != "undefined"){
-                $scope.currentUserName = userCtrl.currentUser.username;
-            }
         });
 
-//        $http.get('/all-interests').success(function(data){
-//            userCtrl.allInts = data;
-//        });
+        $http.get('/all-interests').success(function(data){
+            userCtrl.allInts = data;
+        });
+
+        $http.get('/getRsvpedEvent').success(function(data){
+            userCtrl.rsvpedEvent = data;
+        });
+
+        $http.get('/getReco').success(function(data){
+            userCtrl.reco = data;
+        });
 
         userCtrl.updateUserInfo = function(){
-            if(userCtrl.msg.length>0){
-                userCtrl.msg = "";
-            }
             $http.post('/updateCurrentUser', userCtrl.currentUser).success(function(data){
                 // do something?
-                userCtrl.msg="Success!";
             });
         };
 
         userCtrl.checkUser = function(){
-            if(typeof userCtrl.currentUser['username'] != 'undefined')
+            if(userCtrl.currentUser === {})
             {
-                return true;
-            }
-            else{
                 return false;
             }
-        };
-
-        userCtrl.login = function(){
-            if(userCtrl.msg.length > 0){
-                userCtrl.msg = "";
+            else{
+                return true;
             }
-            $http.post('/login', userCtrl.auth).success(function(data){
-                userCtrl.msg = "Success!";
-                userCtrl.auth = {};
-            });
         };
 
-        userCtrl.signup = function(){
-            if(userCtrl.msg.length > 0){
-                userCtrl.msg = "";
-            }
-            $http.post('/signup', userCtrl.auth).success(function(data){
-                userCtrl.msg = "Success!";
-                userCtrl.auth = {};
-            });
-        }
-
-        userCtrl.logout = function(){
-            $http.post('/logout', "");
-            userCtrl.currentUser = {};
-        };
-
-    }]);
-
-    app.controller("AccountController", ['$http', '$log','$rootScope', function($http, $log, $scope, $rootScope){
-        var accCtrl = this;
-        accCtrl.rsvpedEvent = [];
-        accCtrl.reco = [];
-
-        $http.get('/getRsvpedEvent').success(function(data){
-            accCtrl.rsvpedEvent = data;
-        });
-
-        $http.get('/getReco').success(function(data){
-            accCtrl.reco = data;
-        });
     }]);
 
     app.filter('getCatedInts', function () {
@@ -237,54 +151,43 @@
     }
     ];
 
-//    var all_interests = [
-//        {
-//            name: "Art",
-//            parent: "Arts & Entertainment"
-//        },
-//        {
-//            name: "Fiction",
-//            parent: "Arts & Entertainment"
-//        },
-//        {
-//            name: "Film",
-//            parent: "Arts & Entertainment"
-//        },
-//        {
-//            name: "Lean Startup",
-//            parent: "Business & Career"
-//        },
-//        {
-//            name: "Marketing",
-//            parent: "Business & Career"
-//        },
-//        {
-//            name: "Investing",
-//            parent: "Business & Career"
-//        },
-//        {
-//            name: "Social Media",
-//            parent: "Internet & Technology"
-//        },
-//        {
-//            name: "Interaction Design",
-//            parent: "Internet & Technology"
-//        },
-//        {
-//            name: "Cloud Computing",
-//            parent: "Internet & Technology"
-//        }
-//    ];
-
-    var all_interests=[
-        {parent_c:"Social", children_c:["Nightlife","Fun Times"]},
-        {parent_c:"Internet & Technology", children_c:["Hacking", "Programming", "Java", "Photography", "PHP", "Social Media", "Interaction Design", "Cloud Computing"]},
-        {parent_c:"Hobbies", children_c:["Beer", "Travel", "Wine", "Games", "Motorcycle Riding"]},
-        {parent_c:"Science", children_c:["Evolution", "Astronomy", "Biology", "Innovation"]},
-        {parent_c:"Health & Support", children_c:["Meditation", "Yoga", "Depression", "Fitness"]},
-        {parent_c:"Sport", children_c:["Football", "Swimming"]},
-        {parent_c:"Arts & Entertainment", children_c:["Art", "Fiction", "Film"]},
-        {parent_c:"Business & Career", children_c:["Lean Startup", "Marketing", "Investing"]}
+    var all_interests = [
+        {
+            name: "Art",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Fiction",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Film",
+            parent: "Arts & Entertainment"
+        },
+        {
+            name: "Lean Startup",
+            parent: "Business & Career"
+        },
+        {
+            name: "Marketing",
+            parent: "Business & Career"
+        },
+        {
+            name: "Investing",
+            parent: "Business & Career"
+        },
+        {
+            name: "Social Media",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Interaction Design",
+            parent: "Internet & Technology"
+        },
+        {
+            name: "Cloud Computing",
+            parent: "Internet & Technology"
+        }
     ];
 
     var event_details = {
@@ -308,37 +211,6 @@
             name: "test user3"
         }]
     };
-
-    app.directive('fileModel', ['$parse', function ($parse) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs) {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
-
-                element.bind('change', function(){
-                    scope.$apply(function(){
-                        modelSetter(scope, element[0].files[0]);
-                    });
-                });
-            }
-        };
-    }]);
-
-    app.service('fileUpload', ['$http', function ($http) {
-        this.uploadFileToUrl = function(file, uploadUrl){
-            var fd = new FormData();
-            fd.append('file', file);
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .success(function(){
-            })
-            .error(function(){
-            });
-        }
-    }]);
 
     app.directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
       // contains
