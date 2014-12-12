@@ -43,7 +43,7 @@
         <div class="container">
             <div class="col-md-8 col-md-offset-2">
                 <div class="event-detail">
-                    <h1>{{'{{eveCtrl.eventDetail.title}}'}}</h1>
+                    <h1><strong>{{'{{eveCtrl.eventDetail.title}}'}}</strong></h1>
                     <table>
                         <tr>
                             <td>
@@ -169,6 +169,52 @@
                 </section>
             </div>
         </div>
+    <div ng-controller="UserController as userCtrl">
+<!--    modal windows-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title" id="myModalLabel">Login</h2>
+                    <p>Don't have an account? <a href="#">Sign up now.</a></p>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>Username:</p>
+                        <p><input type="text" class="form-control" ng-model="userCtrl.auth.username"/></p>
+                        <p>Password:</p>
+                        <p><input type="password" class="form-control" ng-model="userCtrl.auth.password"/></p>
+                        <p style="margin-top:20px;">
+                            <a href="/"><button type="button" class="btn btn-primary" ng-click="userCtrl.login()">Login</button></a><label class="msg-label">{{'{{userCtrl.msg}}'}}</label>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title" id="H1">Sign up</h2>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>Username: </p>
+                        <p><input type="text" class="form-control" ng-model="userCtrl.auth.username" /></p>
+                        <p>Password:</p>
+                        <p><input type="password" class="form-control" ng-model="userCtrl.auth.password" /></p>
+                        <p style="margin-top:20px;">
+                            <a href="/profile"><button type="button" class="btn btn-success" style="width:100%;" ng-click="userCtrl.signup()">Sign up</button></a><label class="msg-label">{{'{{userCtrl.msg}}'}}</label>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <footer>
         &copy; 2014 Social Lite all right reserved.
     </footer>

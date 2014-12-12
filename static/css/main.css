@@ -1,6 +1,6 @@
 body{
     background: url(../img/page_bg.jpg) center center no-repeat fixed;
-    font-family: 'PT Sans', sans-serif !important;
+    font-family: 'Arial', sans-serif;
 }
 
 ul>li{
@@ -280,5 +280,5 @@ table{
 footer{
     text-align: center;
     padding: 50px;
-    border-top: 1px solid #999;
+    color: #fff;
 }
