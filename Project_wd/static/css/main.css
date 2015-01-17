@@ -1,0 +1,166 @@
+a{
+    cursor: pointer;
+}
+
+.navbar-brand{
+	font-family: 'Lobster', cursive;
+}
+
+.index-slider
+{
+	min-height: 500px;
+	height:50%;
+	background-color: #cccccc;
+	background-image: url(../img/index-jum1.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	color:White;
+	width:100%;
+}
+
+.event-unit {
+	min-height: 300px;
+	height:auto;
+	margin-top:10px;
+	margin-bottom: 10px;
+	cursor:pointer;
+}
+
+.thumbnail
+{
+    overflow:hidden;
+    height:300px;
+    min-height:300px;
+}
+
+.legend
+{
+    min-height:50px;
+    height:auto;
+    text-align:center;
+    color:Black;
+}
+.legend a
+{
+    text-decoration:none;
+    color:Black;
+    font-size:18px;
+}
+
+.jumbotron
+{
+    background:transparent;
+}
+
+.jumbotron-title
+{
+    font-family: 'Open Sans', sans-serif;
+    font-weight:700;
+    font-size:48px;
+    text-shadow: 1px 1px 2px #666666;
+}
+
+.btn-jumbotron
+{
+    background:transparent;
+    border:2px solid white;
+    border-radius:3px;
+    padding: 5px 15px;
+    transition: all 0.3s;
+}
+
+.btn-jumbotron:hover
+{
+    background-color:White;
+    color:Black;
+}
+
+.load-more a{
+	display: block;
+	border: 1px solid grey;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+	min-height: 50px;
+	height: 5%;
+	text-decoration: none;
+	font-size: 18px;
+	vertical-align: middle;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top:10px;
+	transition: all 0.3s;
+}
+
+.load-more a:hover{
+	opacity:0.8;
+	box-shadow: 2px 2px 1px #666666;
+	tranform:translate(-5px,-5px);
+}
+
+.modal
+{
+    margin-top:10%; 
+}
+
+.modal-body
+{
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.modal-dialog
+{
+    max-width:400px;
+    width:40%;
+}
+
+.modal-footer
+{
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.clear
+{
+    text-align:left !important;
+}
+
+.index-search-section
+{
+    margin-top:15px;
+    margin-bottom:15px;
+    background-color:#cccccc;
+    box-shadow:2px 2px 1px #999999;
+    padding: 20px;
+}
+
+.index-search-section ul li
+{
+    list-style:none;
+    text-decoration:none;
+    display:inline-block;
+    margin:5px;
+}
+
+.sort-section a
+{
+    display:inline-block;
+    margin:5px;
+}
+
+.event-detail>caption{
+    font-size: 22px;
+    font-weight: 700;
+
+}
+
+.event-detail ul>li{
+    list-style: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+.event-detail ul{
+    -webkit-padding-start: 0px;
+}

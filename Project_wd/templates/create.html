@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block create %}
+        <script type="text/javascript">
+            function add(){
+
+                var title = document.getElementById("title").value;
+                var time = document.getElementById("time").value;
+                var address = document.getElementById("address").value;
+                var detail = document.getElementById("detail").value;
+                var jsonObj = {"title": title,"time": time,"address":address,"detail":detail};
+
+
+                $.get($SCRIPT_ROOT + '/create', jsonObj,
+                            function(data) {
+                                console.log("Hi");
+                             });
+            }
+
+
+        </script>
+        <form action="{{url_for('createevent')}}" method=post>
+            <p>title: <input type="text" id="title"/></p>
+            <p>time: <input type="text" id="time"/></p>
+            <p>address: <input type="text" id="address"/></p>
+            <p>detail: <input type="text" id="detail"/></p>
+            <input type="button" value="submit" onclick="add()">
+        </form>
+
+{% endblock %}

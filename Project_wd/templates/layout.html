@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+</head>
+<p>Hi! {{session["username"]}}</p>
+{% if "username" not in session %}
+<a href="{{url_for('login')}}">login</a>
+<a href="{{url_for('register')}}">signup</a>
+{% else %}
+<a href="{{url_for('logout')}}">logout</a>
+{% endif %}
+<a href="#">create</a>
+<a href="#" id="temp">profile</a>
+<a href="{{url_for('get_rsvped_event')}}">search</a>
+<a href="{{url_for('load_all_events')}}">load</a>
+{% block login %}{% endblock %}
+{% block signup %}{% endblock %}
+{% block create %}{% endblock %}
+{% block profile %}{% endblock %}
+</html>

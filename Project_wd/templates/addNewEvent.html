@@ -1,0 +1,77 @@
+<html ng-app="socialLite">
+<head>
+	<title>Social Lite</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/angular.min.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
+</head>
+<body ng-controller="EventController as eveCtrl">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Social Lite</a>
+			</div>
+
+			<div class="navbar-collapse" ng-controller="UserController as userCtrl">
+				<ul class="nav navbar-nav">
+					<li><a href="addNewEvent">Create an Event</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li ng-hide="userCtrl.currentUser"><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
+					<li ng-hide="userCtrl.currentUser"><a href="#" data-toggle="modal" data-target="#signupModal">Sign up</a></li>
+				    <li ng-show="userCtrl.currentUser"><a href="account_index"><img src="http://placehold.it/25x25" /><label>{{'{{userCtrl.currentUser.displayname}}'}}</label></a></li>
+                </ul>
+			</div>
+		</div>
+	</nav>
+        <div class="container">
+            <div class="col-md-12">
+                <form name="newEventForm" ng-submit="newEventForm.$valid && eveCtrl.createNewEvent()">
+                    <p>Create a new event</p>
+                    <table>
+                        <tr>
+                            <td>Title:</td>
+                            <td><input type="text" ng-model="eveCtrl.newEvent.title" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Event Date:</td>
+                            <td><input type="date" ng-model="eveCtrl.newEvent.date" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td><input type="text" ng-model="eveCtrl.newEvent.address" required/></td>
+                        </tr>
+                        <tr>
+                            <td>City:</td>
+                            <td><input type="text" ng-model="eveCtrl.newEvent.city"/></td>
+                        </tr>
+                        <tr>
+                            <td>State:</td>
+                            <td><input type="text" ng-model="eveCtrl.newEvent.state" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td><input type="text" ng-model="eveCtrl.newEvent.detail" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Category:</td>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="item in eveCtrl.allInts">
+                                        <label><input type="checkbox" checklist-model="eveCtrl.newEvent.category" checklist-value="item.name">{{'{{item.name}}'}}</label>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit" value="submit">Submit</button><label>{{'{{eveCtrl.msg}}'}}</label>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
